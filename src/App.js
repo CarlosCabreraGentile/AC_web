@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import 'antd/dist/antd.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Route, Routes } from "react-router-dom";
+import { GlobalProvider } from "./context/GlobalState";
+import "./App.css";
+// import { Layout } from "antd";
+import Heading from "./components/Heading";
+import Content from "./components/Content";
+import UserInsert from "./components/users/UserInsert";
+
+// const { Header } = Layout;
+// const { Footer } = Layout;
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      {/* <div className="App"> */}
+        {/* <Layout> */}
+          <Heading />
+          {/* <Header>Header</Header> */}
+          <Routes>
+            <Route path="/" element={<Content />} />
+            <Route path="/add" element={<UserInsert />} />
+            {/* <Route path="/edit/:id" element={<TaskForm />} />  */}
+          </Routes>
+          {/* <Footer style={{ textAlign: "center" }}>Users List</Footer> */}
+        {/* </Layout> */}
+      {/* </div> */}
+    </GlobalProvider>
   );
 }
 
