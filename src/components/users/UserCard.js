@@ -23,7 +23,6 @@ const UserCard = (props) => {
   };
 
   const handleDelete = async (id) => {
-    debugger;
     deleteUser(id);
   };
 

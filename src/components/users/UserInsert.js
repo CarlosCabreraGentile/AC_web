@@ -31,7 +31,6 @@ const UserInsert = () => {
 
   const onFinish = async (e) => {
     e.preventDefault();
-    debugger
     const values = { firstName, lastName, email, salary };
     userFound ? updateUser(values, params.id) : addUser(values);
     navigate("/");
