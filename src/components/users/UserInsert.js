@@ -6,18 +6,39 @@ import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { GlobalContext } from "../../context/GlobalState";
 
 const UserInsert = () => {
-  const { users, deleteUser, toggleUserDone, getUsers, getUser, addUser } = useContext(GlobalContext);
+  const { users, deleteUser, toggleUserDone, getUsers, getUser, addUser, updateUser } =
+    useContext(GlobalContext);
   const navigate = useNavigate();
   const params = useParams();
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [salary, setSalary] = useState("");
+  const [userFound, setUserFound] = useState(false);
+
+  useEffect(() => {
+    const userFound = users.find((user) => {
+      return user._id === params.id;
+    });
+    if (userFound) {
+      setUserFound(true);
+      setFirstname(userFound.firstName);
+      setLastname(userFound.lastName);
+      setEmail(userFound.email);
+      setSalary(userFound.salary);
+    }
+  }, [params.id, users]);
 
   const onFinish = async (e) => {
     e.preventDefault();
+    debugger
     const values = { firstName, lastName, email, salary };
-    addUser(values);
+    userFound ? updateUser(values, params.id) : addUser(values);
+    navigate("/");
+  };
+
+  const onCancel = async (e) => {
+    e.preventDefault();
     navigate("/");
   };
 
@@ -74,6 +95,9 @@ const UserInsert = () => {
                       />
                     </Form.Group>
                   </Row>
+                  <Button variant="danger" type="button" onClick={onCancel}>
+                    Cancel
+                  </Button>
                   <Button variant="primary" type="submit">
                     Submit
                   </Button>

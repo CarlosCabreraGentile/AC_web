@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Content />} />
             <Route path="/add" element={<UserInsert />} />
-            <Route path="/edit/:id" element={<UserInsert />} /> 
+            <Route path="/add/:id" element={<UserInsert />} /> 
           </Routes>
           {/* <Footer style={{ textAlign: "center" }}>Users List</Footer> */}
         {/* </Layout> */}

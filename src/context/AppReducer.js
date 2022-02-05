@@ -19,8 +19,8 @@ export default function appReducer(state, action) {
       const updatedUser = action.payload;
 
       const updatedUsers = state.users.map((user) => {
-        if (user.id === updatedUser.id) {
-          updatedUser.done = user.done;
+        if (user._id === updatedUser.id) {
+          // updatedUser.done = user.done;
           return updatedUser;
         }
         return user;

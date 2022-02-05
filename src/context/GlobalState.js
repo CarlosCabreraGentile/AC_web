@@ -85,7 +85,20 @@ const getUsers = async () => {
 
   }
 
-  function updateUser(updatedUser) {
+  const updateUser = async (updatedUser, id) => {
+    await axios
+    .put(`http://localhost:3001/user/${id}`, updatedUser)
+    .then((response) => {
+      console.log("EXITO", response);
+      dispatch({
+        type: "UPDATE",
+        payload: updatedUser
+      });
+    })
+    .catch((response) => {
+      console.log("ERROR", response);
+    });
+
     dispatch({
       type: "UPDATE_USER",
       payload: updatedUser,
