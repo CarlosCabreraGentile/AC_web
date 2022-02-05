@@ -11,7 +11,6 @@ const ImageList = () => {
     useEffect(() => {
         images()
         .then((items) => {
-            debugger
             setCar(items)
         })
     }, []);
@@ -21,7 +20,6 @@ const images = async () => {
     try {
         const response = await fetch(`http://localhost:8090/api/cars`);
         const items = await response.json();
-        debugger
         return items;
     } catch (error) {
         console.log(error);
@@ -34,7 +32,6 @@ const images = async () => {
         <ListContainer>
          {car && 
             (car.map((item) => {
-                debugger
             return <Image key={item.id} item={item}/>
         }             
             ))

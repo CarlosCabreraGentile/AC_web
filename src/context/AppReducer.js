@@ -33,7 +33,7 @@ export default function appReducer(state, action) {
     case "DELETE_USER":
       return {
         ...state,
-        users: state.users.filter((user) => user.id !== action.payload),
+        users: state.users.filter((user) => user._id !== action.payload),
       };
     case "TOGGLE_USER_DONE":
       const updatedUsers = state.users.map((user) => {

@@ -1,45 +1,68 @@
-import React, { useState, useEffect } from "react";
-import { ListGroup, Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
+import { Link } from "react-router-dom";
+import { ListGroup, Container, Row, Col, Button } from "react-bootstrap";
+import styled from "styled-components";
 import axios from "axios";
-// import { Card } from "antd";
 
 const UserCard = (props) => {
   const [user, setUser] = useState([]);
+  const {
+    users,
+    deleteUser,
+    toggleUserDone,
+    getUsers,
+    getUser,
+    addUser,
+    updateUser,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     setUser(props?.user);
   }, [props?.user]);
 
   function alertClicked() {
-    alert('You clicked the third ListGroupItem');
+    alert("You clicked the third ListGroupItem");
   }
 
+  const handleDelete = async (id) => {
+    deleteUser(id);
+  };
+
+  const handleUpdate = async (id) => {
+    updateUser(id);
+  };
+
   return (
-    // <Card style={{ width: 300 }}>
-    //   <p>Card content</p>
-    //   <p>{user?.firstName}</p>
-    //   <p>{user?.lastName}</p>
-    //   <p>{user?.email}</p>
-    // </Card>
     <Container>
-    <Row>
-      <Col md={{ span: 6, offset: 3 }}>
-    <ListGroup.Item action onClick={alertClicked}>
-      {/* <a
-        style={{ width: 300 }}
-        href="#!"
-        className="list-group-item list-group-item-action d-flex flex-column justify-content-center"
-      > */}
-        {/* Card content */}
-        {`${user?.firstName}`}
-        {`${user?.lastName}`}
-        {`${user?.email}`}
-      {/* </a> */}
-    </ListGroup.Item>
-    </Col>
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <StyledRow>
+            <ListGroup.Item action onClick={alertClicked}>
+              {`${user?.firstName}`}
+              {`${user?.lastName}`}
+              {`${user?.email}`}
+            </ListGroup.Item>
+            <Link to={`/edit/${user._id}`}>
+              Edit
+            </Link>
+              <Button variant="primary" onClick={() => handleUpdate(user._id)}>
+                Edit
+              </Button>
+            <Button variant="danger" onClick={() => handleDelete(user._id)}>
+              Delete
+            </Button>
+          </StyledRow>
+        </Col>
       </Row>
     </Container>
   );
 };
 
 export default UserCard;
+
+const StyledRow = styled.div`
+  display: flex;
+  padding: 6px;
+  // flex-direction: column;
+`;

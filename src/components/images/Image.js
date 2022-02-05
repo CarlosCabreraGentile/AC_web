@@ -4,7 +4,6 @@ import "antd/dist/antd.css";
 import styled from "styled-components";
 
 const Image = (props) => {
-  debugger
   return (
     <Card
       title={props.item.model}

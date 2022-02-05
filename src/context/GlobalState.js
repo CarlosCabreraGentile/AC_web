@@ -66,15 +66,23 @@ const getUsers = async () => {
     .catch(error => {console.log(error)});
   };
 
-  function addUser(user) {
-    dispatch({
-      type: "ADD_USER",
-      payload: { 
-          ...user, 
-        //   id: v4(), 
-          done: false 
-        },
-    });
+  const addUser = async (user) => {
+    await axios.post("http://localhost:3001/user/", user)
+      .then((response) => {
+        console.log("EXITO", response);
+        dispatch({
+          type: "ADD_USER",
+          payload: { 
+              ...user, 
+            //   id: v4(), 
+              done: false 
+            },
+        });
+      })
+      .catch((response) => {
+        console.log("ERROR", response);
+      });
+
   }
 
   function updateUser(updatedUser) {
@@ -84,10 +92,18 @@ const getUsers = async () => {
     });
   }
 
-  function deleteUser(id) {
-    dispatch({
-      type: "DELETE_USER",
-      payload: id,
+  const deleteUser = async (id) => {
+    await axios
+    .delete(`http://localhost:3001/user/${id}`)
+    .then((response) => {
+      console.log("EXITO", response);
+      dispatch({
+        type: "DELETE_USER",
+        payload: id,
+      });
+    })
+    .catch((response) => {
+      console.log("ERROR", response);
     });
   }
 
