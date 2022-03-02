@@ -2,7 +2,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, Routes } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
-import "./App.css";
+import "./App.scss";
 import Heading from "./components/Heading";
 import Content from "./components/Content";
 import UserInsert from "./components/users/UserInsert";
